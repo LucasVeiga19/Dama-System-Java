@@ -11,12 +11,12 @@ public class UI {
             }
             System.out.println();
         }
-        System.out.println("  a b c d e f g h");
+        System.out.println("  ａ ｂ ｃ ｄ ｅ ｆ ｇ ｈ");
     }
 
     private static void printPiece(DamaPiece piece){
         if (piece == null){
-            System.out.print("-");
+            System.out.print("➖");
         }
         else{
             System.out.print(piece);

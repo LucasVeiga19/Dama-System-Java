@@ -22,11 +22,13 @@ public class DamaMatch {
         return mat;
     }
 
-    private void initialSetup(){
-        board.placePìece(new Stone(board, Color.BLACK), new Position(0, 6));
-        board.placePìece(new Stone(board, Color.BLACK), new Position(5, 6));
+    private void placeNewPiece(char column, int row, DamaPiece piece){
+        board.placePìece(piece, new DamaPosition(column, row).toPosition());
+    }
 
-        board.placePìece(new Stone(board, Color.WHITE), new Position(2, 3));
-        board.placePìece(new Stone(board, Color.WHITE), new Position(5, 4));
+    private void initialSetup(){
+        placeNewPiece('b', 6, new Stone(board, Color.WHITE));
+        placeNewPiece('e', 8, new Stone(board, Color.BLACK));
+        placeNewPiece('e', 1, new Stone(board, Color.WHITE));
     }
 }

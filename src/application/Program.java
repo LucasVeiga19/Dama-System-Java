@@ -1,9 +1,11 @@
 package application;
 
+import dama.DamaException;
 import dama.DamaMatch;
 import dama.DamaPiece;
 import dama.DamaPosition;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Program {
@@ -13,16 +15,26 @@ public class Program {
         DamaMatch damaMatch = new DamaMatch();
 
         while (true){
-            UI.printBoard(damaMatch.getPieces());
-            System.out.println();
-            System.out.print("Source: ");
-            DamaPosition source = UI.readDamaPosition(sc);
+            try {
+                UI.clearScreen();
+                UI.printBoard(damaMatch.getPieces());
+                System.out.println();
+                System.out.print("Source: ");
+                DamaPosition source = UI.readDamaPosition(sc);
 
-            System.out.println();
-            System.out.print("Target: ");
-            DamaPosition target = UI.readDamaPosition(sc);
+                System.out.println();
+                System.out.print("Target: ");
+                DamaPosition target = UI.readDamaPosition(sc);
 
-            DamaPiece capturedPiece = damaMatch.performDamaMove(source, target);
+                DamaPiece capturedPiece = damaMatch.performDamaMove(source, target);
+            } catch (DamaException e){
+                System.out.println(e.getMessage());
+                sc.nextLine();
+            }
+            catch (InputMismatchException e) {
+                System.out.println(e.getMessage());
+                sc.nextLine();
+            }
         }
     }
 }

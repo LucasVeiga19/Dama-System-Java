@@ -1,6 +1,8 @@
 package dama;
 
 import boardgame.Board;
+import boardgame.BoardException;
+import boardgame.Piece;
 import boardgame.Position;
 import dama.pieces.Stone;
 
@@ -20,6 +22,27 @@ public class DamaMatch {
             }
         }
         return mat;
+    }
+
+    public DamaPiece performDamaMove(DamaPosition sourcePosition, DamaPosition targetPosition){
+        Position source = sourcePosition.toPosition();
+        Position target = targetPosition.toPosition();
+        validateSourcePosition(source);
+        Piece capturedPiece = makeMove(source, target);
+        return (DamaPiece) capturedPiece;
+    }
+
+    private Piece makeMove(Position source, Position target){
+        Piece p = board.removePiece(source);
+        Piece capturedPiece = board.removePiece(target);
+        board.placePìece(p, target);
+        return capturedPiece;
+    }
+
+    private void validateSourcePosition(Position position){
+        if (!board.thereIsAPiece(position)){
+            throw new BoardException("There is no piece on source position");
+        }
     }
 
     private void placeNewPiece(char column, int row, DamaPiece piece){

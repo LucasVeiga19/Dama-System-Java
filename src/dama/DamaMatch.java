@@ -35,7 +35,7 @@ public class DamaMatch {
     private Piece makeMove(Position source, Position target){
         Piece p = board.removePiece(source);
         Piece capturedPiece = board.removePiece(target);
-        board.placePìece(p, target);
+        board.placePiece(p, target);
         return capturedPiece;
     }
 
@@ -43,10 +43,13 @@ public class DamaMatch {
         if (!board.thereIsAPiece(position)){
             throw new BoardException("There is no piece on source position");
         }
+        if (!board.piece(position).isThereAnyPossibleMove()){
+            throw new DamaException("There is no possible moves for the chosen piece");
+        }
     }
 
     private void placeNewPiece(char column, int row, DamaPiece piece){
-        board.placePìece(piece, new DamaPosition(column, row).toPosition());
+        board.placePiece(piece, new DamaPosition(column, row).toPosition());
     }
 
     private void initialSetup(){

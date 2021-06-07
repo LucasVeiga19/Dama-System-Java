@@ -27,11 +27,7 @@ public class Program {
                 DamaPosition target = UI.readDamaPosition(sc);
 
                 DamaPiece capturedPiece = damaMatch.performDamaMove(source, target);
-            } catch (DamaException e){
-                System.out.println(e.getMessage());
-                sc.nextLine();
-            }
-            catch (InputMismatchException e) {
+            } catch (DamaException | InputMismatchException e){
                 System.out.println(e.getMessage());
                 sc.nextLine();
             }

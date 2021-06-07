@@ -13,4 +13,10 @@ public class Stone extends DamaPiece {
     public String toString() {
         return "\uD83D\uDD18";
     }
+
+    @Override
+    public boolean[][] possibleMoves() {
+        boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
+        return mat;
+    }
 }

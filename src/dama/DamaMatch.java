@@ -7,11 +7,23 @@ import boardgame.Position;
 import dama.pieces.Stone;
 
 public class DamaMatch {
+    private int turn;
+    private Color currentPlayer;
     private Board board;
 
     public DamaMatch(){
         board = new Board(8, 8);
+        turn = 1;
+        currentPlayer = Color.RED;
         initialSetup();
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public Color getCurrentPlayer() {
+        return currentPlayer;
     }
 
     public DamaPiece[][] getPieces(){
@@ -36,6 +48,7 @@ public class DamaMatch {
         validateSourcePosition(source);
         validateTargetPosition(source, target);
         Piece capturedPiece = makeMove(source, target);
+        nextTurn();
         return (DamaPiece) capturedPiece;
     }
 
@@ -56,9 +69,17 @@ public class DamaMatch {
         if (!board.thereIsAPiece(position)){
             throw new BoardException("There is no piece on source position");
         }
+        if (currentPlayer != ((DamaPiece)board.piece(position)).getColor()){
+            throw new DamaException("The chosen piece is not yours");
+        }
         if (!board.piece(position).isThereAnyPossibleMove()){
             throw new DamaException("There is no possible moves for the chosen piece");
         }
+    }
+
+    private void nextTurn(){
+        turn++;
+        currentPlayer = (currentPlayer == Color.RED) ? Color.BLUE : Color.RED;
     }
 
     private void placeNewPiece(char column, int row, DamaPiece piece){

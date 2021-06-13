@@ -1,6 +1,7 @@
 package application;
 
 import dama.Color;
+import dama.DamaMatch;
 import dama.DamaPiece;
 import dama.DamaPosition;
 
@@ -43,6 +44,13 @@ public class UI {
         }catch (RuntimeException e){
             throw new InputMismatchException("Error reading DamaPosition. Valid values are from a1 to h8");
         }
+    }
+
+    public static void printMatch(DamaMatch damaMatch){
+        printBoard(damaMatch.getPieces());
+        System.out.println();
+        System.out.println("Turn: "+damaMatch.getTurn());
+        System.out.println("Waiting player: "+damaMatch.getCurrentPlayer());
     }
 
     public static void printBoard(DamaPiece[][] pieces) {

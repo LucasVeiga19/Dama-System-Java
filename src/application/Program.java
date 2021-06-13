@@ -17,7 +17,7 @@ public class Program {
         while (true){
             try {
                 UI.clearScreen();
-                UI.printBoard(damaMatch.getPieces());
+                UI.printMatch(damaMatch);
                 System.out.println();
                 System.out.print("Source: ");
                 DamaPosition source = UI.readDamaPosition(sc);

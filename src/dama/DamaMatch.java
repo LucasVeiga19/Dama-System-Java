@@ -24,10 +24,17 @@ public class DamaMatch {
         return mat;
     }
 
+    public boolean[][] possibleMoves(DamaPosition sourcePosition){
+        Position position = sourcePosition.toPosition();
+        validateSourcePosition(position);
+        return board.piece(position).possibleMoves();
+    }
+
     public DamaPiece performDamaMove(DamaPosition sourcePosition, DamaPosition targetPosition){
         Position source = sourcePosition.toPosition();
         Position target = targetPosition.toPosition();
         validateSourcePosition(source);
+        validateTargetPosition(source, target);
         Piece capturedPiece = makeMove(source, target);
         return (DamaPiece) capturedPiece;
     }
@@ -37,6 +44,12 @@ public class DamaMatch {
         Piece capturedPiece = board.removePiece(target);
         board.placePiece(p, target);
         return capturedPiece;
+    }
+
+    private void validateTargetPosition(Position source, Position target){
+        if (!board.piece(source).possibleMove(target)){
+            throw new DamaException("The chosen piece can't move to target position");
+        }
     }
 
     private void validateSourcePosition(Position position){

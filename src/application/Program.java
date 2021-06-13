@@ -22,6 +22,9 @@ public class Program {
                 System.out.print("Source: ");
                 DamaPosition source = UI.readDamaPosition(sc);
 
+                boolean[][] possibleMoves = damaMatch.possibleMoves(source);
+                UI.clearScreen();
+                UI.printBoard(damaMatch.getPieces(), possibleMoves);
                 System.out.println();
                 System.out.print("Target: ");
                 DamaPosition target = UI.readDamaPosition(sc);

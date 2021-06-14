@@ -5,7 +5,9 @@ import dama.DamaMatch;
 import dama.DamaPiece;
 import dama.DamaPosition;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Program {
@@ -13,11 +15,12 @@ public class Program {
 
         Scanner sc = new Scanner(System.in);
         DamaMatch damaMatch = new DamaMatch();
+        List<DamaPiece> captured = new ArrayList<>();
 
         while (true){
             try {
                 UI.clearScreen();
-                UI.printMatch(damaMatch);
+                UI.printMatch(damaMatch, captured);
                 System.out.println();
                 System.out.print("Source: ");
                 DamaPosition source = UI.readDamaPosition(sc);
@@ -30,6 +33,10 @@ public class Program {
                 DamaPosition target = UI.readDamaPosition(sc);
 
                 DamaPiece capturedPiece = damaMatch.performDamaMove(source, target);
+
+                if (capturedPiece != null){
+                    captured.add(capturedPiece);
+                }
             } catch (DamaException | InputMismatchException e){
                 System.out.println(e.getMessage());
                 sc.nextLine();

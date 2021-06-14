@@ -5,8 +5,11 @@ import dama.DamaMatch;
 import dama.DamaPiece;
 import dama.DamaPosition;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class UI {
 
@@ -46,8 +49,10 @@ public class UI {
         }
     }
 
-    public static void printMatch(DamaMatch damaMatch){
+    public static void printMatch(DamaMatch damaMatch, List<DamaPiece> captured){
         printBoard(damaMatch.getPieces());
+        System.out.println();
+        printCapturePieces(captured);
         System.out.println();
         System.out.println("Turn: "+damaMatch.getTurn());
         System.out.println("Waiting player: "+damaMatch.getCurrentPlayer());
@@ -92,6 +97,20 @@ public class UI {
             }
         }
         System.out.print(" ");
+    }
+
+    private static void printCapturePieces(List<DamaPiece> captured){
+        List<DamaPiece> red = captured.stream().filter(x -> x.getColor() == Color.RED).collect(Collectors.toList());
+        List<DamaPiece> blue = captured.stream().filter(x -> x.getColor() == Color.BLUE).collect(Collectors.toList());
+        System.out.println("Captured pieces:");
+        System.out.print("RED: ");
+        System.out.print(ANSI_RED);
+        System.out.println(Arrays.toString(red.toArray()));
+        System.out.print(ANSI_RESET);
+        System.out.print("BLUE: ");
+        System.out.print(ANSI_BLUE);
+        System.out.println(Arrays.toString(blue.toArray()));
+        System.out.print(ANSI_RESET);
     }
 }
 

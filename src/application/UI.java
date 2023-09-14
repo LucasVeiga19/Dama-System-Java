@@ -66,7 +66,7 @@ public class UI {
             }
             System.out.println();
         }
-        System.out.println("  ａ ｂ ｃ ｄ ｅ ｆ ｇ ｈ");
+        System.out.println("  ａ..ｂ..ｃ.ｄ..ｅ.ｆ..ｇ..h");
     }
 
 
@@ -78,7 +78,7 @@ public class UI {
             }
             System.out.println();
         }
-            System.out.println("  ａ ｂ ｃ ｄ ｅ ｆ ｇ ｈ");
+            System.out.println("  ａ..ｂ..ｃ.ｄ..ｅ.ｆ..ｇ..h");
         }
 
         private static void printPiece(DamaPiece piece, boolean background){
